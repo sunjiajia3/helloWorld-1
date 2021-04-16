@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yidu.ssmdemo001.dao.MenuinfoDao">
+
+    <resultMap id="BaseResultMap" type="com.yidu.ssmdemo001.entity.Menuinfo">
+        <!--@Table menuinfo-->
+        <result property="menuid" column="menuid" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="pid" column="pid" jdbcType="VARCHAR"/>
+        <result property="iconcls" column="iconCls" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          menuid, title, state, url, pid, iconCls
+        from yidu.menuinfo
+        where menuid = #{menuid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          menuid, title, state, url, pid, iconCls
+        from yidu.menuinfo
+        limit #{page}, #{limit}
+    </select>
+    
+    <!--查询所有数据-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from menuinfo;
+    </select>
+    
+    <!--查询总行数-->
+    <select id="count" parameterType="int">
+        select count(1) from menuinfo
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          menuid, title, state, url, pid, iconCls
+        from yidu.menuinfo
+        <where>
+            <if test="menuid != null and menuid != ''">
+                and menuid = #{menuid}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url}
+            </if>
+            <if test="pid != null and pid != ''">
+                and pid = #{pid}
+            </if>
+            <if test="iconcls != null and iconcls != ''">
+                and iconCls = #{iconcls}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="" useGeneratedKeys="true">
+        insert into yidu.menuinfo(menuid, title, state, url, pid, iconCls)
+        values (#{menuid}, #{title}, #{state}, #{url}, #{pid}, #{iconcls})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update yidu.menuinfo
+        <set>
+            <if test="menuid != null and menuid != ''">
+                menuid = #{menuid},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url},
+            </if>
+            <if test="pid != null and pid != ''">
+                pid = #{pid},
+            </if>
+            <if test="iconcls != null and iconcls != ''">
+                iconCls = #{iconcls},
+            </if>
+        </set>
+        where  menuid = #{menuid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from yidu.menuinfo where  menuid = #{menuid}
+    </delete>
+
+</mapper>

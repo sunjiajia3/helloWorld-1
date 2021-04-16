@@ -1,0 +1,22 @@
+server:
+  servlet:
+    #设置项目请求地址
+    context-path: /ssm
+  #设置端口号
+  port: 8080
+
+spring:
+  datasource:
+    password: 123456
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/yidu?serverTimezone=Hongkong
+    driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  #别名
+  type-aliases-package: com.yidu.ssmdemo001.entity

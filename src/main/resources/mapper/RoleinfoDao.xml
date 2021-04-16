@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--有约束作用，验证标签是否正确-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射到指定的dao类-->
+<mapper namespace="com.yidu.ssmdemo001.dao.RoleinfoDao">
+
+    <resultMap id="BaseResultMap" type="com.yidu.ssmdemo001.entity.Roleinfo">
+        <result property="roleid" column="roleid" jdbcType="INTEGER"/>
+        <result property="rolename" column="rolename" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--根据id查出角色-->
+    <select id="selectById" parameterType="integer" resultMap="BaseResultMap">
+        select * from roleinfo where roleid = #{roleid}
+    </select>
+</mapper>
